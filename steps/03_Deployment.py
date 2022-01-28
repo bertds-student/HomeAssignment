@@ -30,7 +30,7 @@ def prepareEnv(ws):
 
 def prepareDeployment(ws, environment):
 
-    #service_name = os.environ.get('MODEL_NAME')
+    service_name = os.environ.get('SCORE_SERVICE_NAME')
     entry_script = os.path.join(os.environ.get('SCRIPT_FOLDER'), 'score.py')
 
     inference_config = InferenceConfig(entry_script=entry_script, environment=environment)
@@ -40,7 +40,7 @@ def prepareDeployment(ws, environment):
     model = Model(ws, name=MODEL_NAME)
 
     service = Model.deploy(workspace=ws,
-                        name=MODEL_NAME,
+                        name=service_name,
                         models=[model],
                         inference_config=inference_config,
                         deployment_config=aci_config,
