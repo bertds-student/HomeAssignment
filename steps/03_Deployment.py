@@ -30,17 +30,17 @@ def prepareEnv(ws):
 
 def prepareDeployment(ws, environment):
 
-    service_name = os.environ.get('SCRIPT_SERVICE_NAME')
+    #service_name = os.environ.get('MODEL_NAME')
     entry_script = os.path.join(os.environ.get('SCRIPT_FOLDER'), 'score.py')
 
     inference_config = InferenceConfig(entry_script=entry_script, environment=environment)
     aci_config = AciWebservice.deploy_configuration(cpu_cores=1, memory_gb=1)
 
     # Get our model based on the name we registered in the previous notebook
-    model = Model(ws, MODEL_NAME)
+    model = Model(ws, name=MODEL_NAME)
 
     service = Model.deploy(workspace=ws,
-                        name=service_name,
+                        name=MODEL_NAME,
                         models=[model],
                         inference_config=inference_config,
                         deployment_config=aci_config,
