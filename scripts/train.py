@@ -9,6 +9,7 @@ from tensorflow import keras
 from tensorflow.keras.optimizers import SGD
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.metrics import mean_squared_error
 
 # This AzureML package will allow to log our metrics etc.
 from azureml.core import Run
@@ -143,7 +144,7 @@ history = model.fit_generator( aug.flow(X_train, y_train, batch_size=BATCH_SIZE)
 
 print("[INFO] evaluating network...")
 predictions = model.predict(X_test, batch_size=32)
-print(classification_report(y_test.argmax(axis=1), predictions.argmax(axis=1), target_names=['cats', 'dogs', 'panda'])) # Give the target names to easier refer to them.
+print(classification_report(y_test.argmax(axis=1), predictions.argmax(axis=1), target_names=['Boxer','German_Sheperd',  'Newfoundland'])) # Give the target names to easier refer to them.
 # If you want, you can enter the target names as a parameter as well, in case you ever adapt your AI model to more animals.
 
 cf_matrix = confusion_matrix(y_test.argmax(axis=1), predictions.argmax(axis=1))
@@ -167,6 +168,15 @@ cmtx = {
         "matrix": [[int(y) for y in x] for x in cf_matrix]
     }
 }
+
+mse = mean_squared_error(predictions, y_test)
+run.log('mse', mse)
+
+for some_key in history.history.keys():
+    if type(history.history[some_key] is list):
+        run.log_list(some_key, history.history[some_key])
+    else:
+        run.log(some_key, history.history[some_key])
 
 run.log_confusion_matrix('Confusion matrix - error rate', cmtx)
 

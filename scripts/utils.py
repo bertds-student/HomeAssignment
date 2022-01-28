@@ -8,7 +8,7 @@ from sklearn.preprocessing import LabelEncoder
 from typing import List
 
 def getTargets(filepaths: List[str]) -> List[str]:
-    labels = [fp.split('/')[-1].split('_')[0] for fp in filepaths] # Get only the animal name
+    labels = [fp.split('/')[-2] for fp in filepaths] # Get only the animal name
 
     return labels
 

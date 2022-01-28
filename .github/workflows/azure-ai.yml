@@ -53,16 +53,16 @@ on:
 env:
   CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
 
-  CLIENT_ID: c2f7b98e-f968-48a5-b0d9-f2e8d80edebd # Change this !
-  TENANT_ID: 4ded4bb1-6bff-42b3-aed7-6a36a503bf7a # Change this !
-  WORKSPACE_NAME: segersnathan # Change this !
-  RESOURCE_GROUP: NathanReserve # Change this !
-  SUBSCRIPTION_ID: 7c50f9c3-289b-4ae0-a075-08784b3b9042 # Change this !
+  CLIENT_ID: fc936720-f360-4363-8a31-5832ed590b4d
+  TENANT_ID: 4ded4bb1-6bff-42b3-aed7-6a36a503bf7a
+  WORKSPACE_NAME: bert-desutter-ml
+  RESOURCE_GROUP: 04-AzureML
+  SUBSCRIPTION_ID: ca191df1-2972-47fc-b8c2-cc81364de246
 
-  ANIMALS: cats,dogs,pandas # As we have three classes, let's just defined them here. This way we can easily loop over them later.
-  TRAIN_SET_NAME: animals-training-set
-  TEST_SET_NAME: animals-testing-set
-  MODEL_NAME: animal-cnn
+  ANIMALS: Boxer,German_Sheperd, Newfoundland # As we have three classes, let's just defined them here. This way we can easily loop over them later.
+  TRAIN_SET_NAME: dogbreeds-training-set
+  TEST_SET_NAME: dogbreeds-testing-set
+  MODEL_NAME: dogbreed-cnn
 
   SCRIPT_FOLDER: scripts
 
